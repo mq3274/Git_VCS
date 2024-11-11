@@ -16,10 +16,17 @@ resource "azurerm_subnet" "example" {
   virtual_network_name = azurerm_virtual_network.vnet-block.name
   address_prefixes     = ["10.0.2.0/24"]
 }
-resource "azurerm_storage_account" "example" {
-  name                = "storageaccountname"
+resource "azurerm_storage_account" "stg-block" {
+  name                = "xyzstorageacc"
   resource_group_name = azurerm_resource_group.rg-block.name
   location                 = azurerm_resource_group.rg-block.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
+
+resource "azurerm_storage_container" "example" {
+  name                  = "my-caint"
+  storage_account_name = azurerm_storage_account.stg-block.name
+  container_access_type = "private"
+}
+
