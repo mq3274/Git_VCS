@@ -1,27 +1,25 @@
-module "rg-block" {
-  source = "../../module/Resource_group"
-  rg-map = var.rg-mod
+resource "azurerm_resource_group" "rg-block" {
+    name = "RG-one"
+    location = "west US"
 }
 
-module "sa-block" {
-  depends_on = [module.rg-block]
-  source     = "../../module/Storage_account"
-  stg-map    = var.sa-mod
+resource "azurerm_virtual_network" "vnet-block" {
+  name                = "Vnet"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.rg-block.location
+  resource_group_name = azurerm_resource_group.rg-block.mame
 }
 
-module "secgrp-block" {
-  depends_on = [module.rg-block]
-  source     = "../../module/security_group"
-  secgrp     = var.secgrp-mod
+resource "azurerm_subnet" "example" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.rg-block.name
+  virtual_network_name = azurerm_virtual_network.vnet-block.name
+  address_prefixes     = ["10.0.2.0/24"]
 }
-module "vn-block" {
-  depends_on = [module.rg-block]
-  source     = "../../module/Virtual_network"
-  vnet-map   = var.vn-mod
-}
-
-module "subnetblock" {
-  depends_on = [module.vn-block]
-  source     = "../../module/Subnet"
-  sub-map    = var.sub-mod
+resource "azurerm_storage_account" "example" {
+  name                = "storageaccountname"
+  resource_group_name = azurerm_resource_group.rg-block.name
+  location                 = azurerm_resource_group.rg-block.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 }
