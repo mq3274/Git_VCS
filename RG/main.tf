@@ -25,7 +25,7 @@ resource "azurerm_storage_account" "stg-block" {
 }
 
 resource "azurerm_storage_container" "example" {
-  name                  = "my-caint"
+  name                  = "my-container"
   storage_account_name = azurerm_storage_account.stg-block.name
   container_access_type = "private"
 }
