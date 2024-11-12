@@ -9,6 +9,6 @@ resource "azurerm_resource_group" "example1" {
 }
 
 resource "azurerm_resource_group" "example1" {
-  name     = "rahul"
+  name     = "rahul-jacker"
   location = "Central india"
 }
