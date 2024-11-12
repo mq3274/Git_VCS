@@ -3,6 +3,11 @@ resource "azurerm_resource_group" "rg-block" {
     location = "west US"
 }
 
+resource "azurerm_resource_group" "rg-block1" {
+    name = "RG-two"
+    location = "west US"
+}
+
 resource "azurerm_virtual_network" "vnet-block" {
   name                = "Vnet"
   address_space       = ["10.0.0.0/16"]
