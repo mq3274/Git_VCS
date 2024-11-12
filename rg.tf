@@ -15,5 +15,5 @@ resource "azurerm_resource_group" "example1" {
 
 resource "azurerm_resource_group" "example1" {
   name     = "hp-rg"
-  location = "West UD"
+  location = "West US"
 }
