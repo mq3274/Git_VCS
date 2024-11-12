@@ -29,4 +29,10 @@ resource "azurerm_storage_container" "example" {
   storage_account_name = azurerm_storage_account.stg-block.name
   container_access_type = "private"
 }
+resource "azurerm_storage_container" "example1" {
+  name                  = "my-container-2"
+  storage_account_name = azurerm_storage_account.stg-block.name
+  container_access_type = "private"
+}
+
 
